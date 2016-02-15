@@ -21,11 +21,27 @@ function load() {
     d3.csv("BirdIncidents.csv", function (error, birds) {
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
-            var pdimensions = ["AIRPORT", "ATYPE", "SPECIES", "INCIDENT_YEAR", "INCIDENT_MONTH", "SIZE"];
+            var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH"];
+            var nominal = ["TYPE_ENG", "SIZE"];
+            // var nominal = ["AIRPORT", "ATYPE", "SPECIES", "TYPE_ENG", "SIZE"];
             console.log(d);
-            return pdimensions.includes(d) && (y[d] = d3.scale.linear()
-                .domain(d3.extent(birds, function (p) { return +p[d]; }))
-                .range([height, 0]));
+            if (quantitative.includes(d)) {
+                return y[d] = d3.scale.linear().domain(d3.extent(birds, function (p) { 
+                    return +p[d]; 
+                }))
+                .range([height, 0]);
+            } else if (d == "SIZE") {
+                return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
+            } else if (d == "TYPE_ENG") {
+                return y[d] = d3.scale.ordinal().domain(["A", "B", "C", "D", "E", "F", "M", "N"])
+                .rangePoints([height, 0]);
+            }
+            // return pdimensions.includes(d) && (y[d] = d3.scale.linear()
+            //     .domain(d3.extent(birds, function (p) { 
+            //         console.log(+p[d]);
+            //         return +p[d]; 
+            //     }))
+            //     .range([height, 0]));
         }));
 
         // Add grey background lines for context.
