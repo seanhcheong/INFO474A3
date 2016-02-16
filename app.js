@@ -1,54 +1,36 @@
 var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH", ""];
 var nominal = ["SIZE", "DAMAGE", "SPECIES", "PHASE_OF_FLT"]; //"AIRPORT"
 var airportsSelected = [];
-var birds = [];
-
-var height;
-var width; 
-var axis;
-var svg;
-var background;
-var foreground;
-var x;
-var y;
-var dragging;
-var line; 
-
 function load() {
     
-    var margin = { top: 30, right: 10, bottom: 10, left: 10 };
-    width = 1400 - margin.left - margin.right;
-    height = 3000 - margin.top - margin.bottom;
+    var margin = { top: 30, right: 10, bottom: 10, left: 10 },
+        width = 1400 - margin.left - margin.right,
+        height = 3000 - margin.top - margin.bottom;
 
-    x = d3.scale.ordinal().rangePoints([0, width], 1);
-    y = {};
-    dragging = {};
+    var x = d3.scale.ordinal().rangePoints([0, width], 1),
+        y = {},
+        dragging = {};
 
-    line = d3.svg.line();
-    axis = d3.svg.axis().orient("left");
-        
+    var line = d3.svg.line(),
+        axis = d3.svg.axis().orient("left"),
+        background,
+        foreground;
 
-    svg = d3.select("#pgraph").append("svg")
+    var svg = d3.select("#pgraph").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    getData(height, width, axis, line, svg, x, y, dragging);
-}
 
-
-function getData(height, width, axis, line, svg, x, y, dragging) {
-    d3.csv("BirdIncidents.csv", function (error, birdsFromFile) {
-           birds = birdsFromFile;
-           update(birds, height, width, axis, line, svg, x, y, dragging);
-    })
-}
-
-function update(birds, height, width, axis, line, svg, x, y, dragging) { 
+    d3.csv("BirdIncidents.csv", function (error, birds) {
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
 
+            // var nominal = ["AIRPORT", "ATYPE", "SPECIES", "TYPE_ENG", "SIZE"];
+            console.log(d);
+            
+           // var airport = document.getElementByClass("selctedAirport");
+           
            //return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
            if(d == "AIRPORT") {
                 return y[d] = d3.scale.ordinal()
@@ -82,6 +64,27 @@ function update(birds, height, width, axis, line, svg, x, y, dragging) {
                 .range([height, 0]);
             }
             }));
+
+            //return true;
+
+            // if (quantitative.includes(d)) {
+            //     return y[d] = d3.scale.linear().domain(d3.extent(birds, function (p) { 
+            //         return +p[d]; 
+            //     }))
+            //     .range([height, 0]);
+            // } else if (d == "SIZE") {
+            //     return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
+            // } else if (d == "TYPE_ENG") {
+            //     return y[d] = d3.scale.ordinal().domain(["A", "B", "C", "D", "E", "F", "M", "N"])
+            //     .rangePoints([height, 0]);
+            // }
+            // return pdimensions.includes(d) && (y[d] = d3.scale.linear()
+            //     .domain(d3.extent(birds, function (p) { 
+            //         console.log(+p[d]);
+            //         return +p[d]; 
+            //     }))
+            //     .range([height, 0]));
+        // }));
 
         // Add grey background lines for context.
         background = svg.append("g")
@@ -148,7 +151,8 @@ function update(birds, height, width, axis, line, svg, x, y, dragging) {
             .selectAll("rect")
             .attr("x", -8)
             .attr("width", 16);
-}
+    });
+
 
     function position(d) {
         var v = dragging[d];
@@ -179,5 +183,5 @@ function update(birds, height, width, axis, line, svg, x, y, dragging) {
         });
     }
     
-
+}
 
