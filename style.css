@@ -10,8 +10,7 @@ svg {
 
 .foreground path {
   fill: none;
-  stroke: steelblue;
-  opacity: 0.1;
+  opacity: 0.4;
 }
 
 .brush .extent {

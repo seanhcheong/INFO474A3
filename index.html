@@ -5,14 +5,19 @@
     <title>Dead Birds</title>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="app.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style-map.css">
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script src="maptoggle.js"></script>
 </head>
 <body>
     <p>D3 parallel graph</p>
-    <div id="map"></div>
+    <div id="map">
+    <button id="showAll" onclick="showAll()" class="btn btn-primary">Show All</button>
+    <button id="reset" onclick="reset()" class="btn btn-danger">Reset</button>
+    </div>
     <div id="pgraph"></div>
     
     

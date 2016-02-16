@@ -1,11 +1,11 @@
-var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH", ""];
-var nominal = ["SIZE", "DAMAGE", "SPECIES", "PHASE_OF_FLT"]; //"AIRPORT"
+var quantitative = ["YEAR", "MONTH"];
+var nominal = ["SIZE OF BIRD", "DAMAGE LEVEL", "PHASE OF FLIGHT", "AIRPORT"]; 
 var airportsSelected = [];
 function load() {
     
-    var margin = { top: 30, right: 10, bottom: 10, left: 10 },
-        width = 1400 - margin.left - margin.right,
-        height = 3000 - margin.top - margin.bottom;
+    var margin = { top: 30, right: 10, bottom: 10, left: 140 },
+        width = 1300 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {},
@@ -21,32 +21,43 @@ function load() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+    var color = d3.scale.category20()
+        .domain([
+            "BELLINGHAM INTL",
+            "WES LUPIEN",
+            "ORCAS ISLAND ARPT",
+            "PANGBORN MEMORIAL",
+            "BOEING FIELD/KING COUNTY INTL ARPT",
+            "SEATTLE-TACOMA INTL",
+            "SPOKANE INTERNATIONAL",
+            "TRI-CITIES",
+            "YAKIMA AIR TERMINAL/MCALLISTER FIELD",
+            "PULLMAN/MOSCOW REGIONAL ARPT",
+            "OLYMPIA ARPT",
+            "HARVEY FIELD",
+            "CHEHALIS-CENTRALIA ARPT",
+            "OCEAN SHORES MUNICIPAL ARPT",
+            "FRIDAY HARBOR ARPT",
+            "DECATUR (JONES) ARPT",
+            "WALLA WALLA REGIONAL",
+            "MCCORD FIELD ARPT",
+            "BOWERMAN ARPT",
+            "SNOHOMISH CO (PAINE FIELD)",
+            "RENTON MUNICIPAL ARPT",
+            "GRANT COUNTY ARPT"
+        ]);
 
     d3.csv("BirdIncidents.csv", function (error, birds) {
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
-
-            // var nominal = ["AIRPORT", "ATYPE", "SPECIES", "TYPE_ENG", "SIZE"];
-            console.log(d);
             
-           // var airport = document.getElementByClass("selctedAirport");
-           
-           //return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
            if(d == "AIRPORT") {
                 return y[d] = d3.scale.ordinal()
                 .domain(airportsSelected)
                 .rangePoints([height, 0]);
-   
-                // if(airportsSelected.includes(d)) {
-                //     return p[d];
-                // } 
-                // else {
-                //     return null;
-                // }
-                // }));
-           }
-            
-            else if(nominal.includes(d)) {                
+           }           
+            if(nominal.includes(d)) {                
                 return y[d] = d3.scale.ordinal()
                 .domain(birds.map(function(p) { 
                     if(p[d] == "") {
@@ -65,27 +76,6 @@ function load() {
             }
             }));
 
-            //return true;
-
-            // if (quantitative.includes(d)) {
-            //     return y[d] = d3.scale.linear().domain(d3.extent(birds, function (p) { 
-            //         return +p[d]; 
-            //     }))
-            //     .range([height, 0]);
-            // } else if (d == "SIZE") {
-            //     return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
-            // } else if (d == "TYPE_ENG") {
-            //     return y[d] = d3.scale.ordinal().domain(["A", "B", "C", "D", "E", "F", "M", "N"])
-            //     .rangePoints([height, 0]);
-            // }
-            // return pdimensions.includes(d) && (y[d] = d3.scale.linear()
-            //     .domain(d3.extent(birds, function (p) { 
-            //         console.log(+p[d]);
-            //         return +p[d]; 
-            //     }))
-            //     .range([height, 0]));
-        // }));
-
         // Add grey background lines for context.
         background = svg.append("g")
             .attr("class", "background")
@@ -100,7 +90,10 @@ function load() {
             .selectAll("path")
             .data(birds)
             .enter().append("path")
-            .attr("d", path);
+            .attr("d", path)
+            .attr("stroke", function(d) {
+                return color(d['AIRPORT']);
+            });
 
         // Add a group element for each dimension.
         var g = svg.selectAll(".dimension")
@@ -152,6 +145,7 @@ function load() {
             .attr("x", -8)
             .attr("width", 16);
     });
+    
 
 
     function position(d) {
@@ -184,4 +178,6 @@ function load() {
     }
     
 }
-
+function erase() {
+    document.getElementById("pgraph").innerHTML = '';
+}
