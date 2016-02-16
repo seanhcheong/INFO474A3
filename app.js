@@ -1,4 +1,8 @@
+var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH", ""];
+var nominal = ["SIZE", "DAMAGE", "SPECIES", "PHASE_OF_FLT"]; //"AIRPORT"
+var airportsSelected = [];
 function load() {
+    
     var margin = { top: 30, right: 10, bottom: 10, left: 10 },
         width = 1400 - margin.left - margin.right,
         height = 3000 - margin.top - margin.bottom;
@@ -21,13 +25,12 @@ function load() {
     d3.csv("BirdIncidents.csv", function (error, birds) {
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
-            var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH", ""];
-            var nominal = ["SIZE", "DAMAGE", "SPECIES", "PHASE_OF_FLT"]; //"AIRPORT"
-            var airportsSelected = ["WES LUPIEN", "SEATTLE-TACOMA INTL"];
+
             // var nominal = ["AIRPORT", "ATYPE", "SPECIES", "TYPE_ENG", "SIZE"];
             console.log(d);
             
            // var airport = document.getElementByClass("selctedAirport");
+           
            //return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
            if(d == "AIRPORT") {
                 return y[d] = d3.scale.ordinal()
@@ -179,5 +182,6 @@ function load() {
             }) ? null : "none";
         });
     }
+    
 }
 

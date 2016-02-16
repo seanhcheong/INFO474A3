@@ -32,46 +32,46 @@ function map() {
 
         var airportPoints = [
             {
-                "airport":"bellingham",
+                "airport":"BELLINGHAM INTL",
                 "latitude": 48.7925,
                 "longitude":-122.53
             },
-            {  "airport" :"AJ Eisenberg",
+            {  "airport" :"WES LUPIEN",
                 "latitude": 48.2516,
                 "longitude": -122.67
             },
             {
-                "airport":"Orcas Island",
+                "airport":"ORCAS ISLAND ARPT",
                 "latitude": 48.7080,
                 "longitude": -122.91
             },
             {
-                "airport":"Pangborn Memorial",
+                "airport":"PANGBORN MEMORIAL",
                 "latitude": 47.3980,
                 "longitude": -120.20
             }, 
             {   
-                "airport":"Boeing Field",
+                "airport":"BOEING FIELD/KING COUNTY INTL ARPT",
                 "latitude": 47.53,
                 "longitude": -122.30
             }, 
             {
-                "airport":"Sea tac",
+                "airport":"SEATTLE-TACOMA INTL",
                 "latitude": 47.4488,
                 "longitude": -122.30
             }, 
             {
-                "airport":"Spokane International Airport",
+                "airport":"SPOKANE INTERNATIONAL",
                 "latitude": 47.62,
                 "longitude": -117.53
             }, 
             {
-                "airport":"Tri-Cities Airport",
+                "airport":"TRI-CITIES",
                 "latitude": 46.2646,
                 "longitude": -119.11
             }, 
             {
-                "airport":"Yakima",
+                "airport":"YAKIMA AIR TERMINAL/MCALLISTER FIELD",
                 "latitude": 46.5681,
                 "longitude": -120.5442
             }, 
@@ -172,7 +172,26 @@ function map() {
             .attr("r", "8px")
             .attr("fill", "#0099cc")
             .style("opacity", 0.4)
+            .on("mouseover", mouseHover)
+            .on("mouseout", mouseOut)
+            .on("click", mouseClick)
+            
 
     });
+    function mouseHover(d, i) {
+        d3.select(this).attr({
+            fill: "orange",
+        });
+    }
+    function mouseOut(d, i) {
+        d3.select(this).attr({
+            fill: "#0099cc",
+        });
+    }
+    function mouseClick(d, i) {
+        airportsSelected.push(d.airport);
+        load();
+        alert(d.airport);       
+    }
 
 }
