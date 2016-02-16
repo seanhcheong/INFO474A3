@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dead Birds</title>
+    <title>FAA Wildlife Strikes</title>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -11,14 +11,25 @@
     <link rel="stylesheet" type="text/css" href="style-map.css">
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script src="maptoggle.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
-<body>
-    <p>D3 parallel graph</p>
-    <div id="map">
-    <button id="showAll" onclick="showAll()" class="btn btn-primary">Show All</button>
-    <button id="reset" onclick="reset()" class="btn btn-danger">Reset</button>
+<body style="background-color: #262626;">
+    <h2 style="text-align:center; padding-top:80px;"><b>Reported incidents of civilian aircraft hitting birds and other animals</b></h2>
+    <p style="text-align:center;">by Irene W. & Sean Cheong <a class="fa fa-github fa-lg" href="https://github.com/seanhcheong/INFO474A3"></a></p>
+    <div class="col-sm-2"></div>
+    <div id="map" class="col-sm-6" style="padding-bottom:50px;"></div>
+    <div class="col-sm-2" style="margin-top: 80px; margin-left: 2em;">
+        <button id="showAll" onclick="showAll()" class="btn btn-primary btn-md" style="margin-right:10px;">Show All</button>
+        <button id="reset" onclick="reset()" class="btn btn-danger btn-md">Reset</button>
+        </br>
+        </br>
+        <p>Toggle the Airport on the map to display/hide the data in the Parallel Coordinates.</p>
+        <p>Drag the axis to rearrange the dimensions in the Parallel Coordinates</p>
     </div>
-    <div id="pgraph"></div>
+    <div class="col-xs-2"></div>
+    <div class="col-sm-1"></div>
+    <div id="pgraph" class="col-sm-10" style="padding-bottom:100px; padding-left:20px; padding-right: 20px;"></div>
+    <div class="col-sm-1"></div>
     
     
 </body>
