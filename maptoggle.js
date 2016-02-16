@@ -76,37 +76,37 @@ function map() {
                 "longitude": -120.5442
             }, 
             {
-                "airport":"Pullman",
+                "airport":"PULLMAN/MOSCOW REGIONAL ARPT",
                 "latitude": 46.4438,
                 "longitude": -117.0634
             },
             {
-                "airport":"Olympia",
+                "airport":"OLYMPIA ARPT",
                 "latitude": 46.5933,
                 "longitude": -122.4940
             },
             {
-                "airport":"Harvey Field",
+                "airport":"HARVEY FIELD",
                 "latitude": 47.9082,
                 "longitude": -122.1054
             },   
             {
-                "airport":"Chehalis",
+                "airport":"CHEHALIS-CENTRALIA ARPT",
                 "latitude": 46.4062,
                 "longitude": -122.5896
             },
             {
-                "airport":"Ocean Shores",
+                "airport":"OCEAN SHORES MUNICIPAL ARPT",
                 "latitude": 46.5957,
                 "longitude": -124.0832
             },
             {
-                "airport":"Friday Harbor",
+                "airport":"FRIDAY HARBOR ARPT",
                 "latitude": 48.5219,
                 "longitude": -123.0244
             },
             {
-                "airport":"Decatur",
+                "airport":"DECATUR (JONES) ARPT",
                 "latitude": 39.8344,
                 "longitude": -88.8656
             },
