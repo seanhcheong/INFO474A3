@@ -1,7 +1,7 @@
 function load() {
     var margin = { top: 30, right: 10, bottom: 10, left: 10 },
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 1400 - margin.left - margin.right,
+        height = 3000 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal().rangePoints([0, width], 1),
         y = {},
@@ -21,28 +21,67 @@ function load() {
     d3.csv("BirdIncidents.csv", function (error, birds) {
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
-            var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH"];
-            var nominal = ["TYPE_ENG", "SIZE"];
+            var quantitative = ["INCIDENT_YEAR", "INCIDENT_MONTH", ""];
+            var nominal = ["SIZE", "DAMAGE", "SPECIES", "PHASE_OF_FLT"]; //"AIRPORT"
+            var airportsSelected = ["WES LUPIEN", "SEATTLE-TACOMA INTL"];
             // var nominal = ["AIRPORT", "ATYPE", "SPECIES", "TYPE_ENG", "SIZE"];
             console.log(d);
-            if (quantitative.includes(d)) {
-                return y[d] = d3.scale.linear().domain(d3.extent(birds, function (p) { 
-                    return +p[d]; 
-                }))
-                .range([height, 0]);
-            } else if (d == "SIZE") {
-                return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
-            } else if (d == "TYPE_ENG") {
-                return y[d] = d3.scale.ordinal().domain(["A", "B", "C", "D", "E", "F", "M", "N"])
+            
+           // var airport = document.getElementByClass("selctedAirport");
+           //return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
+           if(d == "AIRPORT") {
+                return y[d] = d3.scale.ordinal()
+                .domain(airportsSelected)
                 .rangePoints([height, 0]);
+   
+                // if(airportsSelected.includes(d)) {
+                //     return p[d];
+                // } 
+                // else {
+                //     return null;
+                // }
+                // }));
+           }
+            
+            else if(nominal.includes(d)) {                
+                return y[d] = d3.scale.ordinal()
+                .domain(birds.map(function(p) { 
+                    if(p[d] == "") {
+                        return null;
+                    } else {
+                        return p[d];
+                    }
+                }))
+                .rangePoints([height, 0]);
+
             }
+            else if(quantitative.includes(d)) {
+                return y[d] = d3.scale.linear()
+                .domain(d3.extent(birds, function(p) { return +p[d]; }))
+                .range([height, 0]);
+            }
+            }));
+
+            //return true;
+
+            // if (quantitative.includes(d)) {
+            //     return y[d] = d3.scale.linear().domain(d3.extent(birds, function (p) { 
+            //         return +p[d]; 
+            //     }))
+            //     .range([height, 0]);
+            // } else if (d == "SIZE") {
+            //     return y[d] = d3.scale.ordinal().domain(["Small", "Medium", "Large"]).rangePoints([height, 0]);
+            // } else if (d == "TYPE_ENG") {
+            //     return y[d] = d3.scale.ordinal().domain(["A", "B", "C", "D", "E", "F", "M", "N"])
+            //     .rangePoints([height, 0]);
+            // }
             // return pdimensions.includes(d) && (y[d] = d3.scale.linear()
             //     .domain(d3.extent(birds, function (p) { 
             //         console.log(+p[d]);
             //         return +p[d]; 
             //     }))
             //     .range([height, 0]));
-        }));
+        // }));
 
         // Add grey background lines for context.
         background = svg.append("g")
