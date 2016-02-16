@@ -190,7 +190,7 @@ function map() {
     }
     function mouseClick(d, i) {
         airportsSelected.push(d.airport);
-        load();
+        update(birds, height, width, axis, line, svg, x, y, dragging);
         alert(d.airport);       
     }
 

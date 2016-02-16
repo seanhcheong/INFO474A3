@@ -12,6 +12,7 @@ var foreground;
 var x;
 var y;
 var dragging;
+var line; 
 
 function load() {
     
@@ -23,7 +24,7 @@ function load() {
     y = {};
     dragging = {};
 
-    var line = d3.svg.line();
+    line = d3.svg.line();
     axis = d3.svg.axis().orient("left");
         
 
@@ -33,18 +34,18 @@ function load() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    getData(height, width, axis, svg, x, y, dragging);
+    getData(height, width, axis, line, svg, x, y, dragging);
 }
 
 
-function getData(height, width, axis, svg, x, y, dragging) {
+function getData(height, width, axis, line, svg, x, y, dragging) {
     d3.csv("BirdIncidents.csv", function (error, birdsFromFile) {
            birds = birdsFromFile;
-           update(birds, height, width, axis, svg, x, y, dragging);
-    }
+           update(birds, height, width, axis, line, svg, x, y, dragging);
+    })
 }
 
-function update(birds, height, width, axis, svg, x, y, dragging) { 
+function update(birds, height, width, axis, line, svg, x, y, dragging) { 
         // Extract the list of dimensions and create a scale for each.
         x.domain(dimensions = d3.keys(birds[0]).filter(function (d) {
 
@@ -178,5 +179,5 @@ function update(birds, height, width, axis, svg, x, y, dragging) {
         });
     }
     
-}
+
 
