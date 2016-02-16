@@ -6,7 +6,7 @@
 }
 .mesh {
     fill: none;
-    stroke: white;
+    stroke: #262626;
     stroke-width: 3px;
     stroke-linejoin: round;
 }

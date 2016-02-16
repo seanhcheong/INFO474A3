@@ -140,7 +140,7 @@ function map() {
         .data(states).enter()
         .append("path")
         .attr("class", "feature")
-        .style("fill", "#f2f2f2")
+        .style("fill", "#737373")
         .attr("d", path);
 
         // put boarder around states 
@@ -168,7 +168,7 @@ function map() {
                 return projection([d.longitude, d.latitude])[1]; })
             .attr("r", "8px")
             .attr("fill", "#0099cc")
-            .style("opacity", 0.6)
+            .style("opacity", 0.7)
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide)
             .on("click", mouseClick)
@@ -184,7 +184,7 @@ function map() {
             airportsSelected.splice(index, 1);
                
         } else { 
-            d3.select(this).attr('fill', "black");
+            d3.select(this).attr('fill', "#00394d");
             airportsSelected.push(d.airport);
             
         } 
@@ -221,7 +221,7 @@ function showAll() {
         "RENTON MUNICIPAL ARPT",
         "GRANT COUNTY ARPT"
     ];
-    d3.select("#map").selectAll("circle").attr("fill", "black");
+    d3.select("#map").selectAll("circle").attr("fill", "#00394d");
     load();
 }
 function reset() {

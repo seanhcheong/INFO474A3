@@ -1,6 +1,6 @@
 h1, h2, h3, p {
   font: sans-serif;
-  font-color: white;
+  color: white;
 }
 
 body {
@@ -13,7 +13,7 @@ svg {
 
 .background path {
   fill: none;
-  stroke: #ddd;
+  stroke: grey;
   shape-rendering: crispEdges;
 }
 
@@ -31,11 +31,14 @@ svg {
 .axis line,
 .axis path {
   fill: none;
-  stroke: #000;
+  stroke: #e6e6e6;
   shape-rendering: crispEdges;
 }
 
 .axis text {
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;    */
+  color: ##fff; 
   cursor: move;
+  font-size: 12px;
+  font-weight: bold;
 }
