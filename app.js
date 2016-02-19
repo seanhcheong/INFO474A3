@@ -1,3 +1,14 @@
+var http = require('http');
+var port = 9000;
+
+http.createServer(function(req,res) {
+    res.writeHead(200, {'Content-type':'text/plan'});
+    res.end("Hello There, world");
+}).listen(port);
+
+console.log("Listening on port", port);
+
+
 var quantitative = ["YEAR", "MONTH"];
 var nominal = ["SIZE OF BIRD", "DAMAGE LEVEL", "PHASE OF FLIGHT", "AIRPORT"]; 
 var airportsSelected = [];
