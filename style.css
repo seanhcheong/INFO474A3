@@ -1,6 +1,12 @@
-h1, h2, h3, p {
+h1, h2, h3, p, li {
   font: sans-serif;
   color: white;
+}
+#list {
+    margin:0;
+}
+li {
+    font-size: 10pt;
 }
 
 body {
@@ -36,8 +42,8 @@ svg {
 }
 
 .axis text {
-  /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;    */
-  color: ##fff; 
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;    
+  color: white; 
   cursor: move;
   font-size: 12px;
   font-weight: bold;
